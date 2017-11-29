@@ -51,7 +51,7 @@ setup(
     long_description=readme + '\n\n' + history,
     author='Luan Guimarães Lacerda',
     author_email='luang@protonmail.ch',
-    url='https://github.com/luanguimaraesla/django-courier',
+    url='https://gitlab.com/empurrandojuntos/django-courier',
     packages=[
         'courier',
     ],
