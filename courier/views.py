@@ -1,37 +1,16 @@
-# -*- coding: utf-8 -*-
-from django.views.generic import (
-    CreateView,
-    DeleteView,
-    DetailView,
-    UpdateView,
-    ListView
-)
+from rest_framework import viewsets, permissions
 
-from .models import (
-    Notification,
-)
+from .models import Notification, UserNotification
+from .serializers import NotificationSerializer, UserNotificationSerializer
 
 
-class NotificationCreateView(CreateView):
-
-    model = Notification
-
-
-class NotificationDeleteView(DeleteView):
-
-    model = Notification
+class NotificationViewSet(viewsets.ModelViewSet):
+    serializer_class = NotificationSerializer
+    queryset = Notification.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
 
-class NotificationDetailView(DetailView):
-
-    model = Notification
-
-
-class NotificationUpdateView(UpdateView):
-
-    model = Notification
-
-
-class NotificationListView(ListView):
-
-    model = Notification
+class UserNotificationViewSet(viewsets.ModelViewSet):
+    serializer_class = UserNotificationSerializer
+    queryset = UserNotification.objects.all()
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
