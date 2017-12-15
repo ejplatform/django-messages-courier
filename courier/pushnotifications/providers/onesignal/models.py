@@ -1,3 +1,16 @@
 from django.db import models
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
+from model_utils.models import TimeStampedModel
+
+
+class NotificationProfile(TimeStampedModel):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        related_name='notification_info',
+    )
+    onesignal_id = models.CharField(
+        _('OneSignal Id'),
+        max_length=50,
+    )
