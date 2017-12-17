@@ -16,15 +16,16 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'email',)
 
 
-class UserNotificationSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = UserNotification
-        fields = '__all__'
-
-
 class NotificationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notification
-        fields = '__all__'
+        exclude = ('recipients',)
+
+
+class UserNotificationSerializer(serializers.ModelSerializer):
+    notification = NotificationSerializer()
+
+    class Meta:
+        model = UserNotification
+        exclude = ('user',)
