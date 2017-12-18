@@ -21,7 +21,7 @@ class UserNotificationViewSet(mixins.RetrieveModelMixin,
                               viewsets.GenericViewSet):
     """
     Meant for users do check for notifications and update its 'seen' status.
-    No model should be created by this endpoint. Its instances will be created when a new notifications is born
+    No model should be created by this endpoint. Its instances will be created when a new notification is born
     """
     serializer_class = UserNotificationSerializer
     queryset = UserNotification.objects.all()
