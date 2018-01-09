@@ -1,0 +1,29 @@
+import requests
+from django.conf import settings
+from .models import NotificationProfile
+
+
+
+def send(title, message, recipients, sender=''):
+    if not settings.COURIER_ONESIGNAL_ID:
+        raise NameError
+
+    list_of_ids = []
+    for user in recipients:
+        list_of_ids.append(NotificationProfile.objects.get(user=user).onesignal_id)
+
+    if type(title) == str:
+        title = {'en': title}
+
+    if type(message) == str:
+        message = {'en': message}
+
+    request_dict = {
+        'include_player_ids': list_of_ids,
+        'app_id': settings.COURIER_ONESIGNAL_ID,
+        'contents': message,
+        'headings': title
+    }
+    r = requests.post('https://onesignal.com/api/v1/notifications', json=request_dict)
+
+    return r.status_code
