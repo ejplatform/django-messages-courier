@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_static %}
+
+{% block object-tools-items %}
+{{ block.super }}
+<li>
+    <a href="{% url 'admin:bulk-notification-send' %}" class="btn btn-high btn-success">Enviar notificações para todos</a>
+</li>
+{% endblock %}
