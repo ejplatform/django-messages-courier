@@ -20,8 +20,7 @@ def send(title, message, recipients, sender='', provider=None):
     n.save()
 
     for user in recipients:
-        un = UserNotification(user=user, notification=n)
-        un.save()
+        UserNotification.objects.create(user=user, notification=n)
 
     send_onesignal(title, message, recipients, sender)
 

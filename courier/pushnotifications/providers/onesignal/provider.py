@@ -20,10 +20,14 @@ def send(title, message, recipients, sender=''):
 
     request_dict = {
         'include_player_ids': list_of_ids,
-        'app_id': settings.COURIER_ONESIGNAL_ID,
+        'app_id': settings.COURIER_ONESIGNAL_APP_ID,
         'contents': message,
         'headings': title
     }
-    r = requests.post('https://onesignal.com/api/v1/notifications', json=request_dict)
+
+    request_headers = {
+        'Authorization': 'Basic {}'.format(settings.COURIER_ONESIGNAL_USER_ID)
+    }
+    r = requests.post('https://onesignal.com/api/v1/notifications', json=request_dict, headers=request_headers)
 
     return r.status_code
