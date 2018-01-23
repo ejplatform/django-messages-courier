@@ -1,4 +1,5 @@
-from rest_framework import viewsets, permissions, mixins
+from rest_framework import viewsets, permissions, mixins, status
+from rest_framework.response import Response
 
 from .models import Notification, UserNotification
 from .serializers import NotificationSerializer, UserNotificationSerializer
@@ -30,4 +31,16 @@ class UserNotificationViewSet(mixins.RetrieveModelMixin,
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
+    def mark_as_read(self, request, pk):
+        obj = self.get_object()
+        obj.status = UserNotification.STATUS_READ
+        obj.save()
 
+        return Response(status=status.HTTP_200_OK)
+
+    def mark_as_unread(self, request, pk):
+        obj = self.get_object()
+        obj.status = UserNotification.STATUS_WAITING
+        obj.save()
+
+        return Response(status=status.HTTP_200_OK)
