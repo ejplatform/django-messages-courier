@@ -21,3 +21,4 @@ urlpatterns = [
         name='user-notifications-unread'
     ),
 ] + router.urls
+app_name = 'courier'

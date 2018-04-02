@@ -23,7 +23,7 @@ class Notification(TimeStampedModel):
 class UserNotification(TimeStampedModel):
     STATUS_WAITING = 'waiting'
     STATUS_READ = 'read'
-    STATUS_SEEN = 'seen' 
+    STATUS_SEEN = 'seen'
     STATUS_UNSEEN = 'unseen'
     STATUS_CHOICES = (
         (STATUS_WAITING, _('Waiting')),
@@ -35,10 +35,12 @@ class UserNotification(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_notifications',
+        on_delete=models.PROTECT,
     )
     notification = models.ForeignKey(
         Notification,
         related_name='user_notifications',
+        on_delete=models.CASCADE,
     )
     status = models.CharField(
         _('Status'),

@@ -9,6 +9,7 @@ class NotificationProfile(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='notification_info',
+        on_delete=models.PROTECT,
     )
     onesignal_id = models.CharField(
         _('OneSignal Id'),
