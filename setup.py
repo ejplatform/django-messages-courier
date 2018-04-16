@@ -45,13 +45,13 @@ readme = open('README.md').read()
 history = open('HISTORY.rst').read().replace('.. :changelog:', '')
 
 setup(
-    name='django-courier',
+    name='django-messages-courier',
     version=version,
     description="""Simple notification framework for Django""",
     long_description=readme + '\n\n' + history,
     author='Luan Guimarães Lacerda',
     author_email='luang@protonmail.ch',
-    url='https://gitlab.com/empurrandojuntos/django-courier',
+    url='https://gitlab.com/empurrandojuntos/django-messages-courier',
     packages=[
         'courier',
     ],
@@ -59,7 +59,7 @@ setup(
     install_requires=["django-model-utils>=2.0", ],
     license="BSD",
     zip_safe=False,
-    keywords='django-courier',
+    keywords='django-messages-courier',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Django',

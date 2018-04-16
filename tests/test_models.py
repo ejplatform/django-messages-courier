@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """
-test_django-courier
+test_django-messages-courier
 ------------
 
-Tests for `django-courier` models module.
+Tests for `django-messages-courier` models module.
 """
 
 from django.test import TestCase
