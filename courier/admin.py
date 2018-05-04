@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.conf import settings
 import requests
+
+from courier.emails.models import EmailProfile
 from .forms import NotificationSendInBulkForm
 from django.template.response import TemplateResponse
 from django.conf.urls import url
@@ -60,5 +62,9 @@ class UserNotificationAdmin(admin.ModelAdmin):
     readonly_fields = ['created', 'modified',]
 
 
+class EmailProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'active']
+
 admin.site.register(Notification, NotificationAdmin)
 admin.site.register(UserNotification, UserNotificationAdmin)
+admin.site.register(EmailProfile, EmailProfileAdmin)
