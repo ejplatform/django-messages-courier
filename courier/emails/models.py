@@ -6,6 +6,7 @@ class EmailProfile(models.Model):
         settings.AUTH_USER_MODEL,
         related_name='mailing_profile',
         on_delete=models.PROTECT,
+        unique=True
     )
 
     active = models.BooleanField(
