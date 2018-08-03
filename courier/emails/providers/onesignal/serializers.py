@@ -17,7 +17,21 @@ class OneSignalEmailProfileSerializer(serializers.ModelSerializer):
 
 class UserTagsSerializer(serializers.ModelSerializer):
     state = serializers.SlugRelatedField(read_only=True, slug_field='name')
+    last_login = serializers.SerializerMethodField()
+
+    def to_representation(self, instance):
+        repr = super().to_representation(instance)
+        for key in repr:
+            if repr[key] is None:
+                repr[key] = ''
+        return repr
 
     class Meta:
         model = get_user_model()
-        fields = ('state', 'last_login', )
+        fields = ('state', 'last_login', 'from_import',)
+
+
+    def get_last_login(self, obj):
+        if obj.last_login:
+            return str(obj.last_login.date())
+        return obj.last_login

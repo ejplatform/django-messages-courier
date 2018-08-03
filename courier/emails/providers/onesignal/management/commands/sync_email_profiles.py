@@ -83,6 +83,7 @@ class Command(BaseCommand):
             if counter % 100 == 0:
                 print(player, ': ', counter)
             email_auth_hash = get_email_auth_hash(api_key, player)
+            user = User.objects.get(email=player)
             requests_params = {
                 'url': "https://onesignal.com/api/v1/players",
                 'headers': {
@@ -92,9 +93,11 @@ class Command(BaseCommand):
                     'app_id': app_id,
                     'device_type': 11,
                     'identifier': player,
-                    'email_auth_hash': email_auth_hash
+                    'email_auth_hash': email_auth_hash,
+                    'tags': UserTagsSerializer(user).data
                 })
             }
+
             r = requests.post(**requests_params)
             result = json.loads(r.content)
             if r.status_code == 200 and result['success']:
@@ -117,7 +120,6 @@ class Command(BaseCommand):
                 osep = OneSignalEmailProfile()
                 osep.user = user
                 osep.onesignal_id = onesignal_emails['email']['id']
-                osep.tags = UserTagsSerializer(user)
                 print('ERROR: ', email, onesignal_emails[email])
 
 

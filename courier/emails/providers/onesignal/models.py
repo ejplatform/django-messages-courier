@@ -15,5 +15,4 @@ class OneSignalEmailProfile(TimeStampedModel):
         _('Player ID'),
         max_length=50,
     )
-    # tags = models.
     user_updated_at = models.DateTimeField(_('User updated at'), null=True)
