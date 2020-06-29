@@ -35,7 +35,7 @@ class UserNotification(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='user_notifications',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     notification = models.ForeignKey(
         Notification,

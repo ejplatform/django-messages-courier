@@ -9,7 +9,7 @@ class OneSignalEmailProfile(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name='onesignal_email_info',
-        on_delete=models.PROTECT,
+        on_delete=models.CASCADE,
     )
     onesignal_id = models.CharField(
         _('Player ID'),
